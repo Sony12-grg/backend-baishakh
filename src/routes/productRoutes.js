@@ -2,7 +2,10 @@ const { createProduct,getProducts, getProduct,deleteProduct, updateProduct } = r
 const {protect} = require('../middleware/authMiddleware.js');
 
 const router = require('express').Router();
-
+router.get('/', (req, res) => {
+    res.send('Product route');
+}
+);
 router.post('/', protect, createProduct);
 router.get('/', getProducts);
 router.get('/:id', getProduct);
