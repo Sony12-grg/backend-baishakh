@@ -1,4 +1,5 @@
 const Product = require('../model/Product.js')
+const mongoose = require('mongoose');
 
 //Create a new product
 exports.createProduct = async(req, res)=> {
@@ -11,14 +12,23 @@ exports.createProduct = async(req, res)=> {
 
 //Get all products:
 exports.getProducts = async(req,res) => {
-  const products = await Product.find();
-  res.json(products);
+  try{
+    const products = await Product.find();
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+ 
 }
 
 //Get Single Product
 exports.getProduct = async(req,res) => {
-  const product = await Product.findById(req.params.id);
-  res.json(product);
+  try {
+    const product = await Product.findById(req.params.id);
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 }
 
 //Delete Product 
